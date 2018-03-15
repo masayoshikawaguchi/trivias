@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    @category =Category.find(params[:id])
+    @trivians = @category.trivians.order('created_at DESC').page(params[:page])
   end
 end
