@@ -14,10 +14,10 @@
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
             <li>
-              <a href="#">
+              <%= link_to categories_path do %>
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                 トリビアを知る
-                </a>
+              <% end %>
             </li>
             
             <li>
