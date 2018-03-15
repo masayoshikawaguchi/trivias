@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @trivians = current_user.trivians.order('created_at DESC').page(params[:page])
+    @trivians = @user.trivians.order('created_at DESC').page(params[:page])
   end
 
   def new
