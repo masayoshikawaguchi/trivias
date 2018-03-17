@@ -4,7 +4,7 @@
       <div class="cover-contents">
         <h1>ちょっとなるほどいい教養</h1>
         <% unless logged_in? %>
-            <%= link_to 'トリビアンワールドを始める', signup_path, class: 'btn btn-success btn-lg' %>
+            <%= link_to 'トリビアニーを始める', signup_path, class: 'btn btn-success btn-lg' %>
           <% end %>
       </div>
     </div>
@@ -13,55 +13,23 @@
 
 <div class="row">
   <div class="col-sm-5">
-    <ul class="media-list">
-  <% @trivians.each do |trivian| %>
-    <li class="media">
-      <div class="media-left">
-        <img class="media-object img-rounded" src="<%= gravatar_url(trivian.user, options = { size: 50 }) %>" alt="">
-      </div>
-      <div class="media-body">
-        <div>
-          <%= link_to trivian.user.name, user_path(trivian.user) %> <span class="text-muted">posted at <%= trivian.created_at %></span>
-        </div>
-        <div>
-          <p><%= trivian.category.content %></p>
-        </div>
-        <div>
-          <p><%= trivian.content %></p>
-        </div>
-      </div>
-    </li>
-  <% end %>
-  <%= paginate @trivians %>
-</ul>
+    <%= render 'trivians/trivians', trivians: @trivians %>
   </div>
+  
   <div class="col-sm-offset-2 col-sm-5">
-    <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
+    <h1>カテゴリー</h1>
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-        </button>
-      <a class="navbar-brand">カテゴリー</a>
-    </div>
-
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-      <% @categories.each do |category| %>
+    <ul class="media-list">
+    <% @categories.each do |category| %>
       <li class="media">
-      <div class="media-body">
-        <div>
-          <%= link_to category.content, category_path(category) %>
+        <div class="media-body">
+          <div>
+            <%= link_to category.content, category_path(category) %>
+          </div>
         </div>
-      </div>
       </li>
-      <% end %>
-    </div>
+    <% end %>
+    </ul>
   </div>
-</nav>
-  </div>
-</div>
 
+</div>

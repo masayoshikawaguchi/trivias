@@ -5,5 +5,9 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
     has_secure_password
     
+    #1人が複数のtriviansを投稿できる
     has_many :trivians
+    #1人が複数のclipsを持つ（一人で複数の投票をできる）
+    has_many :clips, dependent: :destroy
+    
 end

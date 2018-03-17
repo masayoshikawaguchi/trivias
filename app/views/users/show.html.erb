@@ -17,17 +17,40 @@
         <% @trivians.each do |trivian| %>
       <li class="media">
         <div class="media-body">
-          <div>
-            <p><%= trivian.category.content %></p> <span class="text-muted">posted at <%= trivian.created_at %></span>
+          
+          
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <%= link_to trivian.category.content, category_path(trivian.category) %>
+                    <span class="text-dark">posted at <%= trivian.created_at %></span>
+                  </h3>
+              </div>
+              <div class="panel-body">
+                <div>
+                  <p><%= trivian.content %></p> 
+                  <span class="clip">
+    <% if trivian.iine?(current_user) %>
+      <%= form_for(trivian.clips.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
+        <%= button_tag(class: "btn btn-default btn-xs") do %>
+          <%= content_tag :span, "#{trivian.clips_count}", class: "glyphicon glyphicon-star" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= form_for(trivian.clips.build, remote: true) do |f| %>
+        <div><%= hidden_field_tag :trivian_id, trivian.id %></div>
+        <%= button_tag(class: "btn btn-default btn-xs") do %>
+          <%= content_tag :span, "#{trivian.clips_count}", class: "glyphicon glyphicon-star-empty" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    </span>
+                </div>
+              </div>
           </div>
-          <div>
-            <p><%= trivian.content %></p>
-          </div>
-          <div>
-            <% if current_user == trivian.user %>
-              <%= link_to "Delete", trivian, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-            <% end %>
-          </div>
+
+          
+          
         </div>
       </li>
         <% end %>

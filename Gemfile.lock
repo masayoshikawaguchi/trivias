@@ -38,6 +38,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    after_commit_action (1.1.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     arel (7.1.4)
     bcrypt (3.1.11)
     bindex (0.5.0)
@@ -51,10 +54,16 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    counter_culture (1.9.1)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      after_commit_action (~> 1.0)
     crass (1.0.3)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.23)
+    font-awesome-rails (4.7.0.3)
+      railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (0.9.5)
@@ -175,6 +184,8 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   coffee-rails (~> 4.2)
+  counter_culture (~> 1.8)
+  font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

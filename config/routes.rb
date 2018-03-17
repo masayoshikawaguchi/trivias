@@ -6,9 +6,14 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
+  
+  get 'rankings/clip', to: 'rankings#clip'
+  
   resources :users, only: [:show, :new, :create]
   
   resources :categories, only: [:index, :show]
   
   resources :trivians, only: [:index, :new, :create, :destroy]
+  
+  resources :clips, only: [:create, :destroy]
 end

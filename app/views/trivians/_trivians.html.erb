@@ -1,19 +1,15 @@
-<h1><%= @category.content %></h1>
-
 <ul class="media-list">
-  <% @trivians.each do |trivian| %>
+  <% trivians.each do |trivian| %>
     <li class="media">
       <div class="media-left">
         <img class="media-object img-rounded" src="<%= gravatar_url(trivian.user, options = { size: 50 }) %>" alt="">
       </div>
       <div class="media-body">
-        
-        
-        <div class="panel panel-primary">
+          <div class="panel panel-primary">
               <div class="panel-heading">
                   <h3 class="panel-title">
-                    <%= link_to trivian.user.name, user_path(trivian.user) %>
-                    <span class="text-dark">posted at <%= trivian.created_at %></span> 
+                    <%= link_to trivian.category.content, category_path(trivian.category) %>
+                    <span class="text-dark">posted at <%= trivian.created_at %></span> by <%= link_to trivian.user.name, user_path(trivian.user) %>
                   </h3>
               </div>
               <div class="panel-body">
@@ -40,10 +36,10 @@
           </div>
 
         
-        
-        
-      </div>
+    
+    
+   
+    </div>
     </li>
   <% end %>
-  <%= paginate @trivians %>
 </ul>
