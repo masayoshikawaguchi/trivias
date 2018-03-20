@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   resources :categories, only: [:index, :show]
   
-  resources :trivians, only: [:index, :new, :create, :destroy]
-  
-  resources :clips, only: [:create, :destroy]
+  resources :trivians do
+    resources :clips, only: [:create, :destroy]
+  end
 end

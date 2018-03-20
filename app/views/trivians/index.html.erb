@@ -1,1 +1,1 @@
-<%= render 'trivians/trivians', trivians: @trivians %>
+<%= render partial: 'trivians/trivians', locals: { trivian: @trivian, trivians: @trivians, clips: @clips} %>

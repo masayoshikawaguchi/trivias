@@ -1,30 +1,23 @@
 class ClipsController < ApplicationController
   before_action :require_user_logged_in
   
+  
   def create
+    @clip = Clip.create(user_id: current_user.id, trivian_id: params[:trivian_id])
+    @clips = Clip.where(trivian_id: params[:trivian_id])
     @trivian = Trivian.find(params[:trivian_id])
-    unless @trivian.iine?(current_user)
-      @trivian.iine(current_user)
-      @trivian.reload
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_url }
-        format.js
-      end
-    end
+    @trivian.reload
+   
   end
 
   def destroy
-    @trivian = Clip.find(params[:id]).trivian
-    if @trivian.iine?(current_user)
-      @trivian.uniine(current_user)
-      @trivian.reload
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_url }
-        format.js
-      end
-    end
+    clip = Clip.find_by(user_id: current_user.id, trivian_id: params[:trivian_id])
+    clip.destroy
+    @clips = Clip.where(trivian_id: params[:trivian_id])
+    @trivian = Trivian.find(params[:trivian_id])
+    @trivian.reload
+   
   end
   
-  
-  
+ 
 end

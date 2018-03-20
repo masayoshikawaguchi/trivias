@@ -1,1 +1,1 @@
-$("#trivian-<%= @trivian.id %> .clip").html("<%= escape_javascript(render "clips/clip", trivian: @trivian) %>");
+$("#clip-buttons").html("<%= j(render partial: 'clip', locals: {trivian: @trivian, clips: @clips, clip: @clip}) %>");

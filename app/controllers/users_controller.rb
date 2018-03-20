@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @trivians = @user.trivians.order('created_at DESC').page(params[:page])
+    @clips = Clip.where(trivian_id: params[:trivian_id])
   end
 
   def new

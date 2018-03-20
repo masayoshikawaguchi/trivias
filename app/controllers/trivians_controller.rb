@@ -4,6 +4,7 @@ class TriviansController < ApplicationController
   
   def index
     @trivians = Trivian.all.order('created_at DESC').page(params[:page])
+    @clips = Clip.where(trivian_id: params[:trivian_id])
   end
 
   def new

@@ -29,27 +29,31 @@
               <div class="panel-body">
                 <div>
                   <p><%= trivian.content %></p> 
-                  <span class="clip">
-    <% if trivian.iine?(current_user) %>
-      <%= form_for(trivian.clips.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
-        <%= button_tag(class: "btn btn-default btn-xs") do %>
-          <%= content_tag :span, "#{trivian.clips_count}", class: "glyphicon glyphicon-star" %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <%= form_for(trivian.clips.build, remote: true) do |f| %>
-        <div><%= hidden_field_tag :trivian_id, trivian.id %></div>
-        <%= button_tag(class: "btn btn-default btn-xs") do %>
-          <%= content_tag :span, "#{trivian.clips_count}", class: "glyphicon glyphicon-star-empty" %>
-        <% end %>
-      <% end %>
-    <% end %>
-    </span>
+                  <% if trivian.clip_user(current_user.id) %>
+                    <%= button_to trivian_clip_path(@clips, trivian_id: trivian.id), method: :delete, id: "clip-button", remote: true do %> 
+                      <%= image_tag("icon_red_heart.png") %>
+                      <span>
+                      <%= trivian.clips_count %>
+                      </span>
+                      <% end %>
+                      <% else %>
+                       <%= button_to trivian_clips_path(trivian),id: "clip-button", remote: true do %>  
+                         <%= image_tag("icon_heart.png") %>
+                        <span>
+                        <%= trivian.clips_count %>
+                        </span>
+                        <% end %>
+                       <% end %>
+    
                 </div>
               </div>
           </div>
 
-          
+         <div>
+          <% if current_user == trivian.user %>
+            <%= link_to "削除", trivian, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% end %>
+        </div> 
           
         </div>
       </li>
